@@ -1,7 +1,7 @@
 {
 	"name": "ek$iten$in",
 	"version": "0.3.0.1",
-	"description": "simdilik sadece baslik engeller. \nnude atan yazarlar veritabani gibi.",
+	"description": "ekşi sözlük eklentisi, ek$iten$in. şimdilik sadece başlık  engeller. \nnude atan yazarlar veritabanı  gibi. make ekşi sözlük kutsal bilgi kaynağı again!",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"background": {
 		"scripts": ["background.js"],
