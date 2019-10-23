@@ -1,17 +1,22 @@
 let page = document.getElementById('leBaslikDiv');
 chrome.storage.sync.get('basliklar', data => {
 	const { basliklar = [] } = data
+	const nasilCanlanir = document.getElementById('le-aciklama');
 
 	// engelli baslik yok hocam.!.
 	if (basliklar.length > 0) {
 		const yok = document.getElementById('yok');
 		yok.parentElement.removeChild(yok);
-	};
+	} else {
+		nasilCanlanir.style.display = 'none';
+	}
 
 	for (let baslik of basliklar) {
+		let yeniBirDiv = document.createElement('div');
 		let baslikButonu = document.createElement('button');
 		baslikButonu.innerText = baslik;
 		// buton ekle ki suser basligi canlandirabilsin.
+		baslikButonu.setAttribute('type', 'button');
 		baslikButonu.setAttribute('class', 'baslik-butonu');
 		baslikButonu.addEventListener('click', function() {
 			chrome.storage.sync.get('basliklar', data => {
@@ -21,10 +26,12 @@ chrome.storage.sync.get('basliklar', data => {
 					basliklar: [...aktuelBasliklar.slice(0, index),
 								...aktuelBasliklar.slice(index+1)]
 				}, function() {
-					page.removeChild(baslikButonu);
+					yeniBirDiv.removeChild(baslikButonu);
+					page.removeChild(yeniBirDiv);
 				})
 			});
 		});
-		page.appendChild(baslikButonu);
+		yeniBirDiv.appendChild(baslikButonu);
+		page.appendChild(yeniBirDiv);
 	}
 });
